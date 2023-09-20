@@ -42,7 +42,7 @@ end
 lump  = x;
 
 %% add questionnaires
-plist = {'GDS_total','AMI_total'}; %,'AMI_BehaviouralActivation','AMI_EmotionalSensitivity','AMI_SocialMotivation'
+plist = {'GDS_total','AMI_total','AMI_ifValid','GDS_ifValid'}; %,'AMI_BehaviouralActivation','AMI_EmotionalSensitivity','AMI_SocialMotivation'
 for i = 1:length(plist)
     lump.(plist{i}) = nan(height(lump),1);
 end
@@ -122,6 +122,7 @@ writetable(lump,'EVERYTHING.csv');
 
 %% Average across visist
 l = lump;
+l(l.AMI_ifValid == 0,:) = [];
 
 l.id = l.participantID; l = movevars(l, "id", "Before", "participantID");
 l.visit = ones(height(l),1); l = movevars(l, "visit", "Before", "participantID");
