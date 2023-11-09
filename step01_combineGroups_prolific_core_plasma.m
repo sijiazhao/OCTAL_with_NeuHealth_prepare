@@ -17,4 +17,9 @@ plist = {'group', 'participantID','age','education','ethnicity','gender','ace',.
 
 q = [ plasma(:,plist); lab(:,plist); prolific(:,plist)];
 
+
+q.group = categorical(q.group);
+
+q(q.group == '_unknown',:) = [];
+
 writetable(q,'octal_prolific_lab_plasma.csv');
